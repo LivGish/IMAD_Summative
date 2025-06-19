@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity2">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -13,7 +13,6 @@
         android:layout_height="919dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/background" />
@@ -36,26 +35,27 @@
 
     <TextView
         android:id="@+id/txtDisplay"
-        android:layout_width="309dp"
-        android:layout_height="127dp"
+        android:layout_width="234dp"
+        android:layout_height="295dp"
+        android:background="#FFFFea"
         android:gravity="center_horizontal"
-        android:text="Playlist Manager App"
+        android:text="display text"
         android:textColor="#827571"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:background="#FFFFea"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.302" />
+        app:layout_constraintVertical_bias="0.456" />
 
     <Button
         android:id="@+id/btnPlaylist"
         android:layout_width="167dp"
         android:layout_height="63dp"
         android:backgroundTint="#827571"
-        android:text="Add Song to Playlist"
+        android:text="View Playlist"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
         app:layout_constraintVertical_bias="0.167" />
 
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btnAverage"
         android:layout_width="167dp"
         android:layout_height="63dp"
         android:backgroundTint="#827571"
@@ -75,73 +75,16 @@
         app:layout_constraintVertical_bias="0.776" />
 
     <Button
-        android:id="@+id/btnExit"
+        android:id="@+id/btnBack"
         android:layout_width="167dp"
         android:layout_height="63dp"
         android:backgroundTint="#827571"
-        android:text="Exit"
+        android:text="Back to Main Page"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.901" />
-
-    <EditText
-        android:id="@+id/edtName"
-        android:layout_width="227dp"
-        android:layout_height="51dp"
-        android:ems="10"
-        android:hint="Enter Artist's name:"
-        android:inputType="text"
-        android:color="#827571"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.534" />
-
-    <EditText
-        android:id="@+id/edtComment"
-        android:layout_width="227dp"
-        android:layout_height="51dp"
-        android:ems="10"
-        android:hint="Enter User Comments:"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
-
-    <EditText
-        android:id="@+id/edtSong"
-        android:layout_width="227dp"
-        android:layout_height="51dp"
-        android:ems="10"
-        android:hint="Enter the Song Title:"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.467" />
-
-    <EditText
-        android:id="@+id/edtRating"
-        android:layout_width="227dp"
-        android:layout_height="51dp"
-        android:ems="10"
-        android:inputType="number"
-        tools:layout_editor_absoluteY="306dp"
-        android:hint="Enter the Song Rating:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
