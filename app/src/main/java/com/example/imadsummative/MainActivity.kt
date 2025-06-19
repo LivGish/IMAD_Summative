@@ -12,15 +12,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+
+    val songs = arrayListOf<String>()
+    val names = arrayListOf<String>()
+    val ratings = arrayListOf<Int>()
+    val comments = arrayListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
-        val songs = arrayListOf<String>()
-        val names = arrayListOf<String>()
-        val ratings = arrayListOf<Int>()
-        val comments = arrayListOf<String>()
 
         //declare variables to be used in the code
         val btnPlaylist = findViewById<Button>(R.id.btnPlaylist)
@@ -44,77 +45,85 @@ class MainActivity : AppCompatActivity() {
         val inputRating = findViewById<EditText>(R.id.edtRating)
 
         //declare variables to be used in the code
-        val inputDisplay = findViewById<TextView>(R.id.txtDisplay)
+        val txtDisplay = findViewById<TextView>(R.id.txtDisplay)
+
+        var count = 0
+
+        //displays text when app runs
+        txtDisplay.text = """
+            Welcome to the playlist app. 
+            Add the details for the songs 
+            of your choice into the spaces
+            below then click 'add to playlist' 
+            to add them to your playlist. Click 
+            next to go to the next page when 
+            you are done.
+        """.trimIndent()
+
+        while (count < 4) {
+
+            //when user clicks button, code will run
+            btnPlaylist.setOnClickListener {
+
+                //changes user input to a string variable
+                val song = inputSong.text.toString()
+                //changes user input to a string variable
+                val name = inputName.text.toString()
+                //changes user input to a string variable
+                val ratingStr = inputRating.text.toString()
+                //changes user input to a string variable
+                val comment = inputComment.text.toString()
+
+                //error handling for it any fields are left blank
+                if (song.isBlank() || name.isBlank() || ratingStr.isBlank()) {
+                    //displays a message that tells the user to fill in missing information
+                    Toast.makeText(
+                        this,
+                        "Please fill in all required fields (song name, artist name, and rating).",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    //Exit button click to avoid adding invalid data
+                    return@setOnClickListener
+                }
+
+                //convert rating from string to int
+                val rating = ratingStr.toIntOrNull()
+
+                //display an error message if the number is invalid
+                if (rating == null || rating < 0 || rating > 5) {
+                    Toast.makeText(
+                        this,
+                        "Quantity must be a whole number between 0 and 5.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    //exit button click to avoid adding invalid data
+                    return@setOnClickListener
+                } else {
+                    // Now Kotlin knows rating is non-null inside here
+                    ratings.add(rating)
+                }
 
 
-        val songTitle = arrayOf("song0", "song1", "song2", "song3")
+                //If input is valid, add information into respective lists
+                songs.add(song)
+                names.add(name)
+                comments.add(comment)
 
-        val artistName = arrayOf("name0", "name1", "name2", "name3")
+                //attach lists as extra data to send to next screen
+                val intent = Intent(this, MainActivity2::class.java)
+                intent.putStringArrayListExtra("songs", songs)
+                intent.putStringArrayListExtra("names", names)
+                intent.putIntegerArrayListExtra("ratings", ratings)
+                intent.putStringArrayListExtra("comments", comments)
+                startActivity(intent)
 
-        val songRating = arrayOf(0, 1, 2, 3)
-
-        val songComments = arrayOf("comment0", "comment1", "comment2", "comment3")
-
-        //changes user input to a string variable
-        val song: String = inputSong.text.toString()
-
-        //changes user input to a string variable
-        val name: String = inputName.text.toString()
-
-        //changes user input to a string variable
-        val ratingStr: String = inputRating.text.toString()
-
-        //changes user input to a string variable
-        val comment: String = inputComment.text.toString()
-
-        //when button is clicked, data will be saved
-        btnPlaylist.setOnClickListener {
-
-            //error handling for it any fields are left blank
-            if (song.isBlank() || name.isBlank() || ratingStr.isBlank()) {
-                //displays a message that tells the user to fill in missing information
-                Toast.makeText(
-                    this,
-                    "Please fill in all required fields (song name, artist name, and rating).",
-                    Toast.LENGTH_SHORT
-                )
-                //Exit button click to avoid adding invalid data
-                return@setOnClickListener
             }
-
-            //convert rating from string to int
-            val rating = ratingStr.toIntOrNull()
-
-            //display an error message if the number is invalid
-            if (rating == null || rating < 0 || rating > 5) {
-                Toast.makeText(
-                    this,
-                    "Quantity must be a whole number between 0 and 5.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                //exit button click to avoid adding invalid data
-                return@setOnClickListener
-            } else {
-                // Now Kotlin knows rating is non-null inside here
-                ratings.add(rating)
-            }
-
-
-            //If input is valid, add information into respective lists
-            songs.add(song)
-            names.add(name)
-            ratings.add(rating)
-            comments.add(comment)
-
-            //attach lists as extra data to send to next screen
-            intent.putStringArrayListExtra("songs", songs)
-            intent.putStringArrayListExtra("names", names)
-            intent.putIntegerArrayListExtra("ratings", ratings)
-            intent.putStringArrayListExtra("comments", comments)
-
+            count += 1
+        }
             //switch to next screen when button is pressed
             btnNext.setOnClickListener {
                 val intent = Intent(this, MainActivity2::class.java)
+                startActivity(intent)
             }
 
             btnExit.setOnClickListener {
@@ -122,7 +131,6 @@ class MainActivity : AppCompatActivity() {
                 finishAffinity()
             }
 
-        }
 
     }
 }
