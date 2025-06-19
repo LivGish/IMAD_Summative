@@ -60,79 +60,77 @@ class MainActivity : AppCompatActivity() {
             you are done.
         """.trimIndent()
 
-        while (count < 4) {
+        //when user clicks button, code will run
+        btnPlaylist.setOnClickListener {
 
-            //when user clicks button, code will run
-            btnPlaylist.setOnClickListener {
+            //changes user input to a string variable
+            val song = inputSong.text.toString()
+            //changes user input to a string variable
+            val name = inputName.text.toString()
+            //changes user input to a string variable
+            val ratingStr = inputRating.text.toString()
+            //changes user input to a string variable
+            val comment = inputComment.text.toString()
 
-                //changes user input to a string variable
-                val song = inputSong.text.toString()
-                //changes user input to a string variable
-                val name = inputName.text.toString()
-                //changes user input to a string variable
-                val ratingStr = inputRating.text.toString()
-                //changes user input to a string variable
-                val comment = inputComment.text.toString()
-
-                //error handling for it any fields are left blank
-                if (song.isBlank() || name.isBlank() || ratingStr.isBlank()) {
-                    //displays a message that tells the user to fill in missing information
-                    Toast.makeText(
-                        this,
-                        "Please fill in all required fields (song name, artist name, and rating).",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    //Exit button click to avoid adding invalid data
-                    return@setOnClickListener
-                }
-
-                //convert rating from string to int
-                val rating = ratingStr.toIntOrNull()
-
-                //display an error message if the number is invalid
-                if (rating == null || rating < 0 || rating > 5) {
-                    Toast.makeText(
-                        this,
-                        "Quantity must be a whole number between 0 and 5.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    //exit button click to avoid adding invalid data
-                    return@setOnClickListener
-                } else {
-                    // Now Kotlin knows rating is non-null inside here
-                    ratings.add(rating)
-                }
-
-
-                //If input is valid, add information into respective lists
-                songs.add(song)
-                names.add(name)
-                comments.add(comment)
-
-                //attach lists as extra data to send to next screen
-                val intent = Intent(this, MainActivity2::class.java)
-                intent.putStringArrayListExtra("songs", songs)
-                intent.putStringArrayListExtra("names", names)
-                intent.putIntegerArrayListExtra("ratings", ratings)
-                intent.putStringArrayListExtra("comments", comments)
-                startActivity(intent)
-
+            //error handling for it any fields are left blank
+            if (song.isBlank() || name.isBlank() || ratingStr.isBlank()) {
+                //displays a message that tells the user to fill in missing information
+                Toast.makeText(
+                    this,
+                    "Please fill in all required fields (song name, artist name, and rating).",
+                    Toast.LENGTH_SHORT
+                ).show()
+                //Exit button click to avoid adding invalid data
+                return@setOnClickListener
             }
-            count += 1
+
+            //convert rating from string to int
+            val rating = ratingStr.toIntOrNull()
+
+            //display an error message if the number is invalid
+            if (rating == null || rating < 0 || rating > 5) {
+                Toast.makeText(
+                    this,
+                    "Quantity must be a whole number between 0 and 5.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                //exit button click to avoid adding invalid data
+                return@setOnClickListener
+            } else {
+                // Now Kotlin knows rating is non-null inside here
+                ratings.add(rating)
+            }
+
+
+            //If input is valid, add information into respective lists
+            songs.add(song)
+            names.add(name)
+            comments.add(comment)
+
+            //attach lists as extra data to send to next screen
+            val intent = Intent(this, MainActivity2::class.java)
+            intent.putStringArrayListExtra("songs", songs)
+            intent.putStringArrayListExtra("names", names)
+            intent.putIntegerArrayListExtra("ratings", ratings)
+            intent.putStringArrayListExtra("comments", comments)
+            startActivity(intent)
+
         }
-            //switch to next screen when button is pressed
-            btnNext.setOnClickListener {
-                val intent = Intent(this, MainActivity2::class.java)
-                startActivity(intent)
-            }
 
-            btnExit.setOnClickListener {
-                //closes the app when the button is clicked; This code was adapted from a a Stack Overflow response by "James_Duh" (2018): https://stackoverflow.com/questions/51831820/how-to-close-android-application-in-kotlin
-                finishAffinity()
-            }
 
+        //switch to next screen when button is pressed
+        btnNext.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
+
+        btnExit.setOnClickListener {
+            //closes the app when the button is clicked; This code was adapted from a a Stack Overflow response by "James_Duh" (2018): https://stackoverflow.com/questions/51831820/how-to-close-android-application-in-kotlin
+            finishAffinity()
+        }
 
     }
+
 }
 
 
